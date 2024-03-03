@@ -4,25 +4,24 @@ class Solution {
         List<List<Integer>> ans = new ArrayList<>();
 
         Arrays.sort(nums);
-        int numLen = nums.length - 1;
 
-        for (int i = 0; i < numLen - 1; i++) {
-            if (i > 0 && nums[i] == nums[i-1]) continue;
+        for (int i = 0; i < nums.length - 2; i++) {
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
 
-            int left = i + 1;
-            int right = numLen;
+            int st = i + 1;
+            int ed = nums.length - 1;
 
-            while (left < right) {
-                int sum = nums[i] + nums[left] + nums[right];
+            while (st < ed) {
+                int sum = nums[i] + nums[st] + nums[ed];
                 
                 if (sum == 0) {
-                    ans.add(Arrays.asList(nums[i], nums[left++], nums[right--]));
-                    while(nums[left] == nums[left - 1] && left < right) left++;
-                    while(nums[right] == nums[right + 1] && left < right) right--;
+                    ans.add(Arrays.asList(nums[i], nums[st++], nums[ed--]));
+                    while(nums[st] == nums[st - 1] && st < ed) st++;
+                    while(nums[ed] == nums[ed + 1] && st < ed) ed--;
                 } else if (sum > 0) {
-                    right--;
+                    ed--;
                 } else {
-                    left++;
+                    st++;
                 }
             }
         }
