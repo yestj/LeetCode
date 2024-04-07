@@ -11,15 +11,13 @@ class Solution {
             Arrays.sort(charArr);
             String key = Arrays.toString(charArr);
 
-            if (map.containsKey(key)) {
-                map.get(key).add(strs[i]);
-            } else {
-                List<String> list = new ArrayList<>();
-                list.add(strs[i]);
-                map.put(key, list);
+            if (!map.containsKey(key)) {
+                map.put(key, new ArrayList<>());
             }
+
+            map.get(key).add(strs[i]);
         }
 
-        return new ArrayList(map.values());
+        return new ArrayList<>(map.values());
     }
 }
